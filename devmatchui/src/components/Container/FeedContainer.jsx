@@ -33,7 +33,7 @@ let feed = [
             </div>
         </div>
 
-       { feedToggle ? <div className="w-full h-5/6 pb-16 overflow-y-scroll border-2 border-neutral-950 p-2">
+       { feedToggle ? <div className="w-full h-5/6 pb-16 overflow-y-scroll">
         {
             feed && feed.map((data,index)=>{
                 
