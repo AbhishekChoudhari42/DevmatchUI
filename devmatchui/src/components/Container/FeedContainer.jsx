@@ -2,6 +2,7 @@ import { useState } from "react"
 import Post from "../Post/Post"
 import { check } from "../../utils/check"
 import {AiOutlinePlusCircle} from 'react-icons/ai'
+import CreatePost from "../Input/CreatePost"
 
 const FeedContainer = () => {
 
@@ -26,7 +27,8 @@ let feed = [
   ]
   
   return (
-    <div className="w-full bg-black px-2  ">
+    <div className="w-full bg-black relative ">
+        {createPost && <CreatePost className=""/>}
         <div  className="p-[4px] flex w-full max-h-[100px] mb-4 rounded-md bg-neutral-400 max-h-[100px]">
             
             <div onClick={()=>{setFeedToggle(FEED)}} className={`w-1/2 p-2 center rounded-md ${check(feedToggle === FEED,'bg-black text-white','bg-neutral-400')}`}>
@@ -51,7 +53,7 @@ let feed = [
 
         {/* add post button */}
 
-        <button onClick={()=>{setCreatePost(!createPost)}} className="fixed bg-white bottom-8 right-8 p-2 rounded-full "  > <AiOutlinePlusCircle className={`${check(createPost,'rotate-45','rotate-0')}`} size={32} /> </button>
+        <button onClick={()=>{setCreatePost(!createPost)}} className="fixed bg-white bottom-8 right-8 p-2 rounded-full flex items-center"  ><AiOutlinePlusCircle className={`${check(createPost,'rotate-45','rotate-0')}`} size={36} /> </button>
 
 
 
