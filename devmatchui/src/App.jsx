@@ -13,6 +13,7 @@ function App() {
           </div>
           {/* Feed */}
           <FeedContainer className="w-1/3"/>
+          
           <div className="w-0 bg-gray-600 md:w-1/3 ">
 
           </div>

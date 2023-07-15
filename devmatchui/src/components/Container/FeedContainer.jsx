@@ -1,10 +1,15 @@
 import { useState } from "react"
 import Post from "../Post/Post"
 import { check } from "../../utils/check"
+import {AiOutlinePlusCircle} from 'react-icons/ai'
+
 const FeedContainer = () => {
 
-const [feedToggle,setFeedToggle] = useState(true)
 
+const FEED = 'feed'
+const DISCOVER = 'discover'
+const [feedToggle,setFeedToggle] = useState(FEED)
+const [createPost, setCreatePost] = useState(false)
 
 let feed = [
 
@@ -22,30 +27,42 @@ let feed = [
   
   return (
     <div className="w-full bg-black px-2  ">
-        <div  className="p-[4px] flex w-full max-h-[100px] mb-2 rounded-md bg-neutral-400 max-h-[100px]">
+        <div  className="p-[4px] flex w-full max-h-[100px] mb-4 rounded-md bg-neutral-400 max-h-[100px]">
             
-            <div onClick={()=>{setFeedToggle(!feedToggle)}} className={`w-1/2 p-2 center rounded-md ${check(feedToggle,'bg-black text-white','bg-neutral-400')}`}>
+            <div onClick={()=>{setFeedToggle(FEED)}} className={`w-1/2 p-2 center rounded-md ${check(feedToggle === FEED,'bg-black text-white','bg-neutral-400')}`}>
                 Feed
             </div>
             
-            <div onClick={()=>{setFeedToggle(!feedToggle)}} className={`w-1/2 p-2 center rounded-md ${check(!feedToggle,'bg-black text-white','bg-neutral-400')}`}>
+            <div onClick={()=>{setFeedToggle(DISCOVER)}} className={`w-1/2 p-2 center rounded-md ${check(feedToggle === DISCOVER,'bg-black text-white','bg-neutral-400')}`}>
                 Discover
             </div>
         </div>
 
-       { feedToggle ? <div className="w-full h-5/6 pb-16 overflow-y-scroll">
+       { (feedToggle === FEED) ? (<div className="w-full relative h-5/6 pb-16 overflow-y-scroll">
         {
             feed && feed.map((data,index)=>{
                 
                 return <Post key={index} data={data}/>
 
             })
+
+
         }
-        </div> :
+
+        {/* add post button */}
+
+        <button onClick={()=>{setCreatePost(!createPost)}} className="fixed bg-white bottom-8 right-8 p-2 rounded-full "  > <AiOutlinePlusCircle className={`${check(createPost,'rotate-45','rotate-0')}`} size={32} /> </button>
+
+
+
+
+        </div>) : 
            
-            <div className="text-white">
-                Match crow frens    
-            </div>
+           (<div className="text-white">
+
+                        Match crow frens  
+                          
+           </div>)
         }
     </div>
   )
