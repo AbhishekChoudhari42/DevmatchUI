@@ -7,7 +7,7 @@ function App() {
   
     <div>
         <Navigation/>
-        <div className="w-screen h-screen bg-black pt-20 pb-4 px-4 flex ">
+        <div className="w-screen h-screen bg-black  pt-20 pb-4 px-4 flex ">
           <div className="w-0 bg-blue-200 md:w-1/3">
 
           </div>
