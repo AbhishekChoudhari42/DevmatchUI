@@ -6,7 +6,6 @@ const CREATE_POST = "/posts/createpost"
 
 export const getFeed = async (page) =>{
 
-    console.log(API_BASE_URL)
     const GET_FEED = `/posts/feed?page=${page}&limit=5`
 
     try{
