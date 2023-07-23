@@ -4,7 +4,25 @@ import {BiCommentDetail} from 'react-icons/bi'
 import {RiSendPlaneFill,RiUserFollowLine,RiUserFollowFill} from 'react-icons/ri'
 import { useState } from 'react'
 import userImage from '../../assets/user.jpg'
+import { likePost } from '../../api/post'
+
+import { useMutation , useQueryClient} from '@tanstack/react-query'
+
+
 const Post = ({data}) => {
+
+  const queryClient = useQueryClient()
+
+  const [isLiked,setIsLiked] = useState(false)
+
+
+  const likePostMutation = useMutation({
+    mutationFn:(status,postID) => likePost(status,postID),
+    onSuccess: ()=>{
+      console.log("liked")
+      queryClient.invalidateQueries(["feed"])
+    }
+  })
 
   const [follow,setFollow] = useState(true)
 
@@ -17,9 +35,11 @@ const Post = ({data}) => {
           <img className='w-8 h-8 rounded-md' src={userImage} alt="" />
 
           <h2 className="ml-4 font-bold text-lg">
-              {data.username}
+              {data.user}
           </h2>
+
         </div>
+
           {follow ? <RiUserFollowLine onClick={()=>{setFollow(false)}} size={20}/> : <RiUserFollowFill color='#f2f' onClick={()=>{setFollow(true)}} size={20}/>}
       </div>
 
@@ -28,16 +48,16 @@ const Post = ({data}) => {
       </div>
       <div className="flex items-center ">
         
-        <FcLike className='mb-[2px]'/>
+        <FcLike onClick={()=>{likePostMutation.mutate("liked",data._id)}} color='green' className=' mb-[2px]'/>
        
         <p className="text-sm text-red-100 hover:text-red-400 ml-4">
-          {data.likes}
+          {data.likes?.length}
         </p>
 
         <BiCommentDetail className='ml-8' />
 
         <p className="text-sm text-red-100 hover:text-red-400 ml-4">
-          {data.likes}
+          {data.likes?.length}
         </p>
 
         <RiSendPlaneFill className='ml-8' />
